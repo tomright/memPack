@@ -1,0 +1,12 @@
+body {
+  /* width: 99.8vw;
+  height: 99.6vh; */
+  width: 100vw;
+  height: 100vh;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  word-wrap: break-word;
+}
