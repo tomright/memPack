@@ -1,12 +1,7 @@
 <template>
-  <testVue></testVue>
+  <router-view></router-view>
 </template>
 
-<script>
-import testVue from "@/components/testVue.vue";
-export default {
-  components: { testVue },
-};
-</script>
+<script></script>
 
 <style></style>
