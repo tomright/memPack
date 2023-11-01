@@ -16,7 +16,10 @@ export default {
 
 <style scoped>
 .mainwrapper {
+  padding-top: 10px;
+  width: 100vw;
   display: flex;
+  justify-content: center;
 }
 .navBar {
   margin: 0 auto;
