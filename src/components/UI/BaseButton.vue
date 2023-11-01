@@ -10,4 +10,17 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.baseButton {
+  background-color: inherit;
+  width: auto;
+  height: 30px;
+  border-radius: 5px;
+  border: 1px black solid;
+  padding: 5px;
+  cursor: pointer;
+}
+.baseButton:hover {
+  background-color: rgb(223, 250, 241);
+}
+</style>
