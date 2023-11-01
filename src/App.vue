@@ -1,7 +1,24 @@
 <template>
-  <router-view></router-view>
+  <NavBar class="navBar" />
+  <div class="mainwrapper">
+    <router-view></router-view>
+  </div>
 </template>
 
-<script></script>
+<script>
+import NavBar from "@/components/navBar.vue";
+export default {
+  components: {
+    NavBar,
+  },
+};
+</script>
 
-<style></style>
+<style scoped>
+.mainwrapper {
+  display: flex;
+}
+.navBar {
+  margin: 0 auto;
+}
+</style>
