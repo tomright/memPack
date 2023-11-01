@@ -1,6 +1,7 @@
 <template>
   <div class="navBar__line">
-    <BaseButton>Домашняя страница</BaseButton>
+    <BaseButton>Все мемы</BaseButton>
+    <BaseButton>Ваши мемы</BaseButton>
     <BaseButton>О нас</BaseButton>
     <BaseButton>Регистрация</BaseButton>
   </div>
@@ -17,7 +18,10 @@ export default {
 </script>
 
 <style>
-.navBar__line{
+.navBar__line {
+  padding-top: 10px;
   display: flex;
+  column-gap: 10px;
+  justify-content: center;
 }
 </style>
