@@ -21,7 +21,4 @@ export default {
   display: flex;
   justify-content: center;
 }
-.navBar {
-  margin: 0 auto;
-}
 </style>
