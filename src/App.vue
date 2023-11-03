@@ -17,8 +17,10 @@ export default {
 <style scoped>
 .mainwrapper {
   padding-top: 10px;
-  width: 100vw;
+  width: 95vw;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 </style>
