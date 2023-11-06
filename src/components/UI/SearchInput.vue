@@ -15,7 +15,12 @@ export default {
 </script>
 
 <style>
-.baseInput {
+.search {
+  display: flex;
+  justify-content: center;
+  column-gap: 3px;
+}
+.search__input {
   padding: 5px;
 }
 .search__button {

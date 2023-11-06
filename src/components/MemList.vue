@@ -1,5 +1,6 @@
 <template>
   <div class="memList">
+    <!-- TODO сделать вывод мемов из стора -->
     <div v-for="item in 30">
       <MemCard />
     </div>
@@ -23,6 +24,5 @@ export default {
   width: 100%;
   padding: 10px;
   justify-content: center;
-  align-items: center;
 }
 </style>

@@ -22,6 +22,6 @@ export default {
   display: flex;
   justify-content: center;
   width: 50vw;
-  column-gap: 5px;
+  column-gap: 15px;
 }
 </style>
