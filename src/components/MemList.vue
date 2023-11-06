@@ -1,5 +1,4 @@
 <template>
-  //TODO передалть в компонент дизайн мемов
   <div class="memList">
     <div v-for="item in 30">
       <MemCard />
