@@ -3,6 +3,7 @@ body {
   height: 99.6vh; */
   width: 96vw;
   height: 100vh;
+  margin: 0 auto;
 }
 * {
   margin: 0;
