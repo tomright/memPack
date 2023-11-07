@@ -27,19 +27,19 @@ export default {
   border: 2px solid green;
 }
 .memList__img {
-  background-image: url("@/assets/Img/AssCraving.jpg");
+  background-image: url("@/assets/Img/testimg.jpg");
   background-size: cover;
   width: 200px;
   height: 200px;
 }
 .memList__like {
-  background-image: url("@/assets/Img/noLike.svg");
+  background-image: url("@/assets/ui-img/noLike.svg");
   background-size: contain;
   width: 30px;
   height: 30px;
 }
 .memList__share {
-  background-image: url("@/assets/Img/share.svg");
+  background-image: url("@/assets/ui-img/share.svg");
   background-size: contain;
   width: 30px;
   height: 30px;

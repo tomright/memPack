@@ -24,7 +24,7 @@ export default {
   padding: 5px;
 }
 .search__button {
-  background-image: url("@/assets/Img/search.svg");
+  background-image: url("@/assets/ui-img/search.svg");
   background-size: contain;
   background-position: center;
   width: 30px;
