@@ -1,6 +1,8 @@
 <template>
   <div class="memList__memes">
-    <div class="memList__img"></div>
+    <div class="memList__img">
+      <img class="memList__memes-source" src="@/assets/Img/testimg1.jpg" alt="" />
+    </div>
     <div class="memList__control">
       <div class="memList__like"></div>
       <div class="memList__share"></div>
@@ -20,17 +22,22 @@ export default {
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  column-gap: 5px;
+  row-gap: 5px;
+  padding: 5px;
 
-  width: 210px;
-  height: 250px;
+  width: 250px;
+  height: 210px;
   border: 2px solid green;
 }
 .memList__img {
-  background-image: url("@/assets/Img/testimg.jpg");
-  background-size: cover;
-  width: 200px;
-  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+.memList__memes-source {
+  height: 100%;
+  width: 100%;
 }
 .memList__like {
   background-image: url("@/assets/ui-img/noLike.svg");
