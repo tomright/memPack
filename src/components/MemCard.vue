@@ -1,23 +1,34 @@
 <template>
   <div class="memList__memes">
     <div class="memList__img">
-      <img class="memList__memes-source" src="@/assets/Img/testimg2.jpg" alt="" />
+      <img class="memList__memes-source" src="@/assets/Img/testimg1.jpg" alt="" />
     </div>
     <div class="memList__control">
       <div class="memList__social">
         <div class="memList__like"></div>
         <div class="memList__share"></div>
       </div>
-      <div class="memList__tags">
+      <!-- TODO сделать загрузку тегов из стора и помечать первые 2 тега видимыми, остальные невидимы -->
+      <div class="memList__tags memList__tags--font" :class="memList__tagClass">
         <div class="memList__tag-effect">
           <span>Пираты карибского моря</span>
-        </div> 
+        </div>
         <div class="memList__tag-effect">
           <span>Джек Воробей</span>
-        </div> 
-        <div class="memList__tag-effect">
+        </div>
+        <div
+          :class="{ 'memList__tag-effect--displayNone': !memList__tagClass['memList__tags--openned'] }"
+          class="memList__tag-effect">
+          <span>Пираты карибского моря</span>
+        </div>
+        <div
+          :class="{ 'memList__tag-effect--displayNone': !memList__tagClass['memList__tags--openned'] }"
+          class="memList__tag-effect">
+          <span>Джек Воробей</span>
+        </div>
+        <div @click="openTags" class="memList__tag-effect">
           <span>...</span>
-        </div> 
+        </div>
       </div>
     </div>
   </div>
@@ -26,6 +37,22 @@
 <script>
 export default {
   name: "MemCard",
+  data() {
+    return {
+      memList__tagClass: {
+        "memList__tags--openned": false,
+      },
+    };
+  },
+  methods: {
+    openTags() {
+      if (this.memList__tagClass["memList__tags--openned"]) {
+        this.memList__tagClass["memList__tags--openned"] = false;
+      } else {
+        this.memList__tagClass["memList__tags--openned"] = true;
+      }
+    },
+  },
 };
 </script>
 
@@ -37,9 +64,9 @@ export default {
   align-items: center;
   row-gap: 5px;
   padding: 5px;
-
+  border-radius: 10px;
   width: 270px;
-  height: 250px;
+  height: auto;
   border: 2px solid green;
 }
 .memList__img {
@@ -51,6 +78,7 @@ export default {
 .memList__memes-source {
   height: 100%;
   width: 100%;
+  border-radius: 10px;
   object-fit: cover;
 }
 .memList__like {
@@ -73,6 +101,7 @@ export default {
   width: 100%;
 }
 .memList__social {
+  align-self: flex-end;
   display: flex;
   column-gap: 10px;
 }
@@ -83,9 +112,17 @@ export default {
   column-gap: 3px;
   align-items: flex-start;
   align-self: flex-start;
+  overflow: hidden;
+}
+.memList__tags--font {
   font-family: Helvetica, sans-serif;
   font-size: 12px;
-  overflow: hidden;
+}
+.memList__tags--openned {
+  max-width: 230px;
+  z-index: 10;
+  position: relative;
+  background-color: white;
 }
 .memList__tag-effect {
   display: flex;
@@ -95,5 +132,9 @@ export default {
   padding: 7px;
   background-color: rgba(128, 128, 128, 0.274);
   border-radius: 10px;
+  cursor: pointer;
+}
+.memList__tag-effect--displayNone {
+  display: none;
 }
 </style>
