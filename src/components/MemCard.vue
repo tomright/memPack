@@ -11,17 +11,20 @@
       <!-- TODO сделать загрузку тегов из стора и помечать первые 2 тега видимыми, остальные невидимы -->
       <div class="memList__tags memList__tags--font">
         <span v-for="(tag, index) in mainTags" :key="index" class="memList__tag-effect">{{ tag }}</span>
-        <TransitionGroup name="showTags">
+        <TransitionGroup
+          name="showTags"
+          @before-enter="toggle('hiddenButton')"
+          @after-enter="toggle('hiddenButton')"
+          @before-leave="toggle('hiddenButton')"
+          @after-leave="toggle('hiddenButton')">
           <span ref="hiddenTags" v-for="(tag, index) in otherTags" :key="index" v-show="showAllTag" class="memList__tag-effect">
             {{ tag }}
           </span>
-          <div
-            @click="openTags"
-            class="memList__tag-effect memList__tag-effect--anim"
-            :class="{ 'memList__tag-effect--hidden': hiddenButton }">
-            <span>...</span>
-          </div>
         </TransitionGroup>
+        <div @click="toggle('showAllTag')" class="memList__tag-effect" :class="{ 'memList__tag-effect--hidden': hiddenButton }">
+          <!-- Если Скрывать через v-show='hiddenButton', то исчезает не сразу, дергается, поэтому делаем через класс -->
+          <span>...</span>
+        </div>
       </div>
     </div>
   </div>
@@ -41,20 +44,8 @@ export default {
     };
   },
   methods: {
-    openTags() {
-      if (this.showAllTag) {
-        this.hiddenButton = true;
-        this.showAllTag = false;
-        setTimeout(() => {
-          this.hiddenButton = false;
-        }, 600);
-      } else {
-        this.hiddenButton = true;
-        this.showAllTag = true;
-        setTimeout(() => {
-          this.hiddenButton = false;
-        }, 600);
-      }
+    toggle(variable) {
+      this[variable] = !this[variable];
     },
   },
   computed: {
@@ -128,11 +119,6 @@ export default {
   font-family: Helvetica, sans-serif;
   font-size: 12px;
 }
-.memList__tags--openned {
-  z-index: 10;
-  position: relative;
-  background-color: white;
-}
 .memList__tag-effect {
   display: flex;
   justify-content: center;
@@ -160,7 +146,4 @@ export default {
 .memList__tag-effect--hidden {
   opacity: 0;
 }
-/* .memList__tag-effect--anim {
-  transition: opacity 0.5s ease;
-} */
 </style>
