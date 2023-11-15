@@ -13,10 +13,11 @@
         <span v-for="(tag, index) in mainTags" :key="index" class="memList__tag-effect">{{ tag }}</span>
         <TransitionGroup
           name="showTags"
-          @before-enter="toggle('hiddenButton')"
-          @after-enter="toggle('hiddenButton')"
-          @before-leave="toggle('hiddenButton')"
-          @after-leave="toggle('hiddenButton')">
+          @before-enter="hiddenButton = true"
+          @after-enter="hiddenButton = false"
+          @before-leave="hiddenButton = true"
+          @after-leave="hiddenButton = false">
+          <!-- не работает если использовать функцию toggle -->
           <span ref="hiddenTags" v-for="(tag, index) in otherTags" :key="index" v-show="showAllTag" class="memList__tag-effect">
             {{ tag }}
           </span>
