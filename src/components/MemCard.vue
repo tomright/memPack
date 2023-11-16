@@ -5,7 +5,7 @@
     </div>
     <div class="memList__control">
       <div class="memList__social">
-        <div class="memList__like"></div>
+        <div @click="like" class="memList__like" :class="{ 'memList__like--liked': item.like }"></div>
         <div class="memList__share"></div>
       </div>
       <!-- TODO сделать загрузку тегов из стора и помечать первые 2 тега видимыми, остальные невидимы -->
@@ -47,6 +47,9 @@ export default {
   methods: {
     toggle(variable) {
       this[variable] = !this[variable];
+    },
+    like() {
+      this.$store.dispatch("likeImg", this.item.id);
     },
   },
   computed: {
@@ -90,6 +93,9 @@ export default {
   width: 30px;
   height: 30px;
 }
+.memList__like--liked {
+  background-image: url("@/assets/ui-img/like.svg");
+}
 .memList__share {
   background-image: url("@/assets/ui-img/share.svg");
   background-size: contain;
@@ -106,6 +112,8 @@ export default {
 .memList__social {
   align-self: flex-end;
   display: flex;
+  align-items: center;
+  justify-content: center;
   column-gap: 10px;
 }
 .memList__tags {
