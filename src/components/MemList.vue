@@ -1,7 +1,7 @@
 <template>
   <div class="memList">
     <!-- TODO сделать вывод мемов из стора -->
-    <MasonryWall :items="$store.state.memes" :column-width="300" :gap="5">
+    <MasonryWall :items="$store.state.memes" :min-columns="1" :column-width="300" :gap="5">
       <template #default="{ item }">
         <MemCard :item="item" />
       </template>
