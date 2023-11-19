@@ -1,11 +1,14 @@
 <template>
   <div class="memList__memes">
-    <div class="memList__img">
+    <div class="memList__img" @click="fullScreen">
       <img class="memList__memes-source" :src="item.src" alt="" />
     </div>
     <div class="memList__control">
       <div class="memList__social">
-        <div @click="like" class="memList__like" :class="{ 'memList__like--liked': item.like }"></div>
+        <div class="memList__likes">
+          <div @click="like" class="memList__like-button" :class="{ 'memList__like-button--liked': item.like }"></div>
+          <span class="memList__likeNumber--font">{{ item.likeNumber }}</span>
+        </div>
         <div class="memList__share"></div>
       </div>
       <!-- TODO сделать загрузку тегов из стора и помечать первые 2 тега видимыми, остальные невидимы -->
@@ -35,8 +38,10 @@
 export default {
   name: "MemCard",
   props: {
-    item: Object,
-    required: true,
+    item: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
@@ -51,6 +56,10 @@ export default {
     like() {
       this.$store.dispatch("likeImg", this.item.id);
     },
+    fullScreen() {
+      this.$store.commit("setDialogVisible", this.item);
+      console.log(this.index);
+    },
   },
   computed: {
     mainTags() {
@@ -63,7 +72,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .memList__memes {
   display: flex;
   flex-direction: column;
@@ -74,6 +83,9 @@ export default {
   border-radius: 10px;
   height: auto;
   border: 2px solid green;
+  background-color: white;
+  max-width: 50vw;
+  max-height: 90vh;
 }
 .memList__img {
   display: flex;
@@ -85,15 +97,25 @@ export default {
   height: 100%;
   width: 100%;
   border-radius: 10px;
-  object-fit: cover;
+  object-fit: contain;
 }
-.memList__like {
+.memList__likes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.memList__likeNumber--font {
+  font-family: Helvetica, sans-serif;
+  font-size: 12px;
+}
+.memList__like-button {
   background-image: url("@/assets/ui-img/noLike.svg");
   background-size: contain;
   width: 30px;
   height: 30px;
 }
-.memList__like--liked {
+.memList__like-button--liked {
   background-image: url("@/assets/ui-img/like.svg");
 }
 .memList__share {

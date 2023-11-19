@@ -1,6 +1,8 @@
 <template>
+  <DialogVisible>
+    <MemCard :item="$store.state.memFullScreen" />
+  </DialogVisible>
   <div class="memList">
-    <!-- TODO сделать вывод мемов из стора -->
     <MasonryWall :items="$store.state.memes" :min-columns="1" :column-width="300" :gap="5">
       <template #default="{ item }">
         <MemCard :item="item" />
@@ -12,10 +14,11 @@
 <script>
 import MemCard from "@/components/MemCard.vue";
 import MasonryWall from "@yeger/vue-masonry-wall";
+import DialogVisible from "./UI/DialogVisible.vue";
 
 export default {
   name: "MemList",
-  components: { MemCard },
+  components: { MemCard, DialogVisible },
 };
 </script>
 
