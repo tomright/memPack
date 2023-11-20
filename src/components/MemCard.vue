@@ -11,7 +11,6 @@
         </div>
         <div class="memList__share"></div>
       </div>
-      <!-- TODO сделать загрузку тегов из стора и помечать первые 2 тега видимыми, остальные невидимы -->
       <div class="memList__tags memList__tags--font">
         <span v-for="(tag, index) in mainTags" :key="index" class="memList__tag-effect">{{ tag }}</span>
         <TransitionGroup
@@ -84,7 +83,7 @@ export default {
   height: auto;
   border: 2px solid green;
   background-color: white;
-  max-width: 50vw;
+  max-width: 90vw;
   max-height: 90vh;
 }
 .memList__img {
