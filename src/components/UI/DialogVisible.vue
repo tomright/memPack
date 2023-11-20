@@ -1,11 +1,5 @@
 <template>
-  <div
-    @click="closeDialog"
-    v-show="$store.state.dialogVisible"
-    class="modal-fullScreen"
-    @wheel.prevent
-    @touchmove.prevent
-    @scroll.prevent>
+  <div @click="closeDialog" v-show="vShow" class="modal-fullScreen" @wheel.prevent @touchmove.prevent @scroll.prevent>
     <div @click.stop class="modal-fullScreen__content">
       <slot></slot>
     </div>
@@ -14,11 +8,18 @@
 
 <script>
 export default {
-  methods: {
-    closeDialog() {
-      this.$store.commit("setDialogVisible");
+  props: {
+    vShow: {
+      type: Boolean,
+      required: true,
     },
   },
+  methods: {
+    closeDialog() {
+      this.$emit("closeDialog");
+    },
+  },
+  emits: ["closeDialog"],
 };
 </script>
 

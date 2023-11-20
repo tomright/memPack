@@ -1,5 +1,5 @@
 <template>
-  <DialogVisible>
+  <DialogVisible :vShow="$store.state.dialogVisible" @closeDialog="closeMemFullScreen">
     <MemCard :item="$store.state.memFullScreen" />
   </DialogVisible>
   <div class="memList">
@@ -19,6 +19,11 @@ import DialogVisible from "./UI/DialogVisible.vue";
 export default {
   name: "MemList",
   components: { MemCard, DialogVisible },
+  methods: {
+    closeMemFullScreen() {
+      this.$store.commit("setDialogVisible");
+    },
+  },
 };
 </script>
 
