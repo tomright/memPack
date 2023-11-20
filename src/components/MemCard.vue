@@ -57,7 +57,6 @@ export default {
     },
     fullScreen() {
       this.$store.commit("setDialogVisible", this.item);
-      console.log(this.index);
     },
   },
   computed: {
