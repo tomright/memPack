@@ -9,7 +9,11 @@
           <div @click="like" class="memList__like-button" :class="{ 'memList__like-button--liked': item.like }"></div>
           <span class="memList__likeNumber--font">{{ item.likeNumber }}</span>
         </div>
-        <div class="memList__share"></div>
+        <div class="memList__share" ref="shareElement" @click="shareList">
+          <div class="memList__share-list" :style="shareActive" v-show="activateShare">
+            <BaseButton class="memList__copy-botton"></BaseButton>
+          </div>
+        </div>
       </div>
       <div class="memList__tags memList__tags--font">
         <span v-for="(tag, index) in mainTags" :key="index" class="memList__tag-effect">{{ tag }}</span>
@@ -34,7 +38,9 @@
 </template>
 
 <script>
+import BaseButton from "@/components/UI/BaseButton.vue";
 export default {
+  components: { BaseButton },
   name: "MemCard",
   props: {
     item: {
@@ -46,6 +52,11 @@ export default {
     return {
       showAllTag: false,
       hiddenButton: false,
+      activateShare: false,
+      shareActive: {
+        top: "",
+        left: "",
+      },
     };
   },
   methods: {
@@ -57,6 +68,12 @@ export default {
     },
     fullScreen() {
       this.$store.commit("setDialogVisible", this.item);
+    },
+    shareList() {
+      this.activateShare = !this.activateShare;
+      let coordinate = this.$refs.shareElement.getBoundingClientRect();
+      this.shareActive.top = `${coordinate.y - 25}px`;
+      this.shareActive.left = `${coordinate.x}px`;
     },
   },
   computed: {
@@ -108,6 +125,7 @@ export default {
   font-size: 12px;
 }
 .memList__like-button {
+  cursor: pointer;
   background-image: url("@/assets/ui-img/noLike.svg");
   background-size: contain;
   width: 30px;
@@ -121,6 +139,18 @@ export default {
   background-size: contain;
   width: 30px;
   height: 30px;
+  cursor: pointer;
+}
+.memList__share-list {
+  position: absolute;
+  display: flex;
+  background-color: white;
+}
+.memList__copy-botton {
+  background-image: url("@/assets/ui-img/copy.svg");
+  width: 30px;
+  height: 30px;
+  background-size: contain;
 }
 .memList__control {
   display: flex;
