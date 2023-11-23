@@ -1,7 +1,7 @@
 <template>
   <div class="memList__memes">
     <div class="memList__img" @click="fullScreen">
-      <img class="memList__memes-source" :src="item.src" alt="" />
+      <img ref="imgMem" class="memList__memes-source" :src="item.src" alt="" />
     </div>
     <div class="memList__control">
       <div class="memList__social">
@@ -10,8 +10,9 @@
           <span class="memList__likeNumber--font">{{ item.likeNumber }}</span>
         </div>
         <div class="memList__share" ref="shareElement" @click="shareList">
-          <div class="memList__share-list" :style="shareActive" v-show="activateShare">
-            <BaseButton class="memList__copy-botton"></BaseButton>
+          <div @click.stop class="memList__share-list" :style="shareActive" v-show="activateShare">
+            <BaseButton class="memList__social-button memList__social-button--copy" @click="copyClipboard"></BaseButton>
+            <BaseButton class="memList__social-button memList__social-button--download"></BaseButton>
           </div>
         </div>
       </div>
@@ -70,10 +71,37 @@ export default {
       this.$store.commit("setDialogVisible", this.item);
     },
     shareList() {
+      this.shareActive.top = `0px`;
+      this.shareActive.left = `0px`;
       this.activateShare = !this.activateShare;
       let coordinate = this.$refs.shareElement.getBoundingClientRect();
-      this.shareActive.top = `${coordinate.y - 25}px`;
-      this.shareActive.left = `${coordinate.x}px`;
+      this.shareActive.top = `${coordinate.y - 30 + window.pageYOffset}px`;
+      this.shareActive.left = `${coordinate.x + window.pageXOffset}px`;
+      setTimeout(() => {
+        this.activateShare = !this.activateShare;
+      }, 5000);
+    },
+    async copyClipboard() {
+      this.activateShare = !this.activateShare;
+      if (!("ClipboardItem" in window)) {
+        return alert(
+          "Ваш браузер не поддерживает копирование изображений в буфер обмена." +
+            " Если вы используете Firefox, вы можете включить его" +
+            " установив для dom.events.asyncClipboard.clipboardItem значение true."
+        );
+      }
+      try {
+        const data = await fetch(this.item.src);
+        const blobImg = await data.blob();
+
+        await navigator.clipboard.write([
+          new window.ClipboardItem({
+            "image/png": blobImg,
+          }),
+        ]);
+      } catch (error) {
+        console.error(error.name, error.message);
+      }
     },
   },
   computed: {
@@ -144,12 +172,20 @@ export default {
 .memList__share-list {
   position: absolute;
   display: flex;
+  flex-direction: column-reverse;
   background-color: white;
+  border-radius: 5px;
 }
-.memList__copy-botton {
-  background-image: url("@/assets/ui-img/copy.svg");
+.memList__social-button {
   width: 30px;
   height: 30px;
+}
+.memList__social-button--download {
+  background-image: url("@/assets/ui-img/download1.svg");
+  background-size: contain;
+}
+.memList__social-button--copy {
+  background-image: url("@/assets/ui-img/copy.svg");
   background-size: contain;
 }
 .memList__control {
