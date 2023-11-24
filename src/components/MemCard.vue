@@ -78,7 +78,7 @@ export default {
       this.shareActive.top = `${coordinate.y - 30 + window.pageYOffset}px`;
       this.shareActive.left = `${coordinate.x + window.pageXOffset}px`;
       setTimeout(() => {
-        this.activateShare = !this.activateShare;
+        this.activateShare = false;
       }, 5000);
     },
     async copyClipboard() {
@@ -102,6 +102,12 @@ export default {
       } catch (error) {
         console.error(error.name, error.message);
       }
+    },
+    //TODO вывести переменную "активации поделиться" в стор, чтобы работать независимо от компонента
+    clearOptions() {
+      this.shareActive.top = `0px`;
+      this.shareActive.left = `0px`;
+      this.activateShare = false;
     },
   },
   computed: {
