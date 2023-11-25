@@ -104,7 +104,6 @@ export default {
         console.error(error.name, error.message);
       }
     },
-    //TODO вывести переменную "активации поделиться" в стор, чтобы работать независимо от компонента
     clearOptions() {
       this.shareActive.top = `0px`;
       this.shareActive.left = `0px`;
