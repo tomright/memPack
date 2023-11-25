@@ -1,5 +1,5 @@
 <template>
-  <div @click="closeDialog" v-show="vShow" class="modal-fullScreen" @wheel.prevent @touchmove.prevent @scroll.prevent>
+  <div @click="closeDialog" v-if="vShow" class="modal-fullScreen" @wheel.prevent @touchmove.prevent @scroll.prevent>
     <div @click.stop class="modal-fullScreen__content">
       <slot></slot>
     </div>

@@ -11,7 +11,7 @@
         </div>
         <div class="memList__share" ref="shareElement" @click="shareList">
           <div @click.stop class="memList__share-list" :style="shareActive" v-show="activateShare">
-            <BaseButton class="memList__social-button memList__social-button--copy" @click="copyClipboard"></BaseButton>
+            <BaseButton @click="copyClipboard" class="memList__social-button memList__social-button--copy"></BaseButton>
             <BaseButton @click="downloadMemes" class="memList__social-button memList__social-button--download"> </BaseButton>
           </div>
         </div>
@@ -74,16 +74,21 @@ export default {
     shareList() {
       this.shareActive.top = `0px`;
       this.shareActive.left = `0px`;
-      this.activateShare = !this.activateShare;
+      this.activateShare = true;
       let coordinate = this.$refs.shareElement.getBoundingClientRect();
-      this.shareActive.top = `${coordinate.y - 30 + window.pageYOffset}px`;
-      this.shareActive.left = `${coordinate.x + window.pageXOffset}px`;
-      setTimeout(() => {
-        this.activateShare = false;
-      }, 5000);
+      if (this.$store.state.dialogVisible) {
+        this.shareActive.top = `${coordinate.y - 30}px`;
+        this.shareActive.left = `${coordinate.x}px`;
+      } else {
+        this.shareActive.top = `${coordinate.y - 30 + window.scrollY}px`;
+        this.shareActive.left = `${coordinate.x + window.scrollX}px`;
+      }
+      // setTimeout(() => {
+      //   this.activateShare = false;
+      // }, 5000);
     },
     async copyClipboard() {
-      this.activateShare = !this.activateShare;
+      this.activateShare = false;
       if (!("ClipboardItem" in window)) {
         return alert(
           "Ваш браузер не поддерживает копирование изображений в буфер обмена." +
@@ -105,16 +110,17 @@ export default {
       }
     },
     downloadMemes() {
+      this.activateShare = false;
       let downloadMem = document.createElement("a");
       downloadMem.setAttribute("href", this.item.src);
       downloadMem.setAttribute("download", this.mainTags[0]);
       downloadMem.click();
     },
-    clearOptions() {
-      this.shareActive.top = `0px`;
-      this.shareActive.left = `0px`;
-      this.activateShare = false;
-    },
+    // clearOptions() {
+    //   this.shareActive.top = `0px`;
+    //   this.shareActive.left = `0px`;
+    //   this.activateShare = false;
+    // },
   },
   computed: {
     mainTags() {

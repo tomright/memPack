@@ -403,10 +403,10 @@ export default createStore({
     },
     setDialogVisible(state, idMemes = {}) {
       if (state.dialogVisible) {
-        state.dialogVisible = !state.dialogVisible;
+        state.dialogVisible = false;
       } else {
         state.memFullScreen = idMemes;
-        state.dialogVisible = !state.dialogVisible;
+        state.dialogVisible = true;
       }
     },
   },
