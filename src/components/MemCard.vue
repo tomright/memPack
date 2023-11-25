@@ -69,6 +69,7 @@ export default {
     },
     fullScreen() {
       this.$store.commit("setDialogVisible", this.item);
+      this.activateShare = false;
     },
     shareList() {
       this.shareActive.top = `0px`;
@@ -147,6 +148,10 @@ export default {
   width: 100%;
   border-radius: 10px;
   object-fit: contain;
+}
+.memList__memes-source--fullScreen {
+  /* min-width: 80vw; */
+  object-fit: fill;
 }
 .memList__likes {
   display: flex;
