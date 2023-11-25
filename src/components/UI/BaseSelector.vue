@@ -1,16 +1,22 @@
 <template>
-  <select>
+  <select id="sort" @change="changeOptions">
     <option selected disabled>Сортировать по:</option>
-    <option>Лайкам</option>
-    <option>Просмотрам</option>
-    <option>Дате добавления</option>
+    <option v-for="item in $store.state.sortOptions" :key="item.value" :value="item.value">
+      {{ item.name }}
+    </option>
   </select>
 </template>
 
 <script>
 export default {
   name: "BaseSector",
+  methods: {
+    changeOptions(event) {
+      this.$store.commit("changeSortOption", event.target.value);
+    },
+  },
 };
 </script>
 
-<style></style>
+<style scoped>
+</style>

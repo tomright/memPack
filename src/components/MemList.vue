@@ -3,7 +3,7 @@
     <MemCard :item="$store.state.memFullScreen" />
   </DialogVisible>
   <div class="memList">
-    <MasonryWall :items="$store.state.memes" :min-columns="2" :column-width="300" :gap="5">
+    <MasonryWall :items="sortMemes" :min-columns="2" :column-width="300" :gap="5">
       <template #default="{ item }">
         <MemCard :item="item" />
       </template>
@@ -22,6 +22,11 @@ export default {
   methods: {
     closeMemFullScreen() {
       this.$store.commit("setDialogVisible");
+    },
+  },
+  computed: {
+    sortMemes() {
+      return this.$store.getters.sortMemes;
     },
   },
 };
