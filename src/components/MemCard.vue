@@ -12,7 +12,7 @@
         <div class="memList__share" ref="shareElement" @click="shareList">
           <div @click.stop class="memList__share-list" :style="shareActive" v-show="activateShare">
             <BaseButton class="memList__social-button memList__social-button--copy" @click="copyClipboard"></BaseButton>
-            <BaseButton class="memList__social-button memList__social-button--download"></BaseButton>
+            <BaseButton @click="downloadMemes" class="memList__social-button memList__social-button--download"> </BaseButton>
           </div>
         </div>
       </div>
@@ -103,6 +103,12 @@ export default {
       } catch (error) {
         console.error(error.name, error.message);
       }
+    },
+    downloadMemes() {
+      let downloadMem = document.createElement("a");
+      downloadMem.setAttribute("href", this.item.src);
+      downloadMem.setAttribute("download", this.mainTags[0]);
+      downloadMem.click();
     },
     clearOptions() {
       this.shareActive.top = `0px`;
