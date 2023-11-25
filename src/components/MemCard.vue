@@ -1,7 +1,7 @@
 <template>
   <div class="memList__memes">
     <div class="memList__img" @click="fullScreen">
-      <img ref="imgMem" class="memList__memes-source" :src="item.src" alt="" />
+      <img class="memList__memes-source" :src="item.src" alt="" />
     </div>
     <div class="memList__control">
       <div class="memList__social">
@@ -153,10 +153,6 @@ export default {
   width: 100%;
   border-radius: 10px;
   object-fit: contain;
-}
-.memList__memes-source--fullScreen {
-  /* min-width: 80vw; */
-  object-fit: fill;
 }
 .memList__likes {
   display: flex;
