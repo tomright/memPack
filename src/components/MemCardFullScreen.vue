@@ -71,8 +71,7 @@ export default {
 }
 /* TODO в мобильной версии сделать и ширину и высоту */
 .memList__memes-source {
-  max-height: 80vh;
-  max-width: 80vw;
+  height: 80vh;
   border-radius: 10px;
   object-fit: contain;
 }
