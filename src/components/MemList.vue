@@ -1,6 +1,6 @@
 <template>
   <DialogVisible :vShow="$store.state.dialogVisible" @closeDialog="closeMemFullScreen">
-    <MemCard :item="$store.state.memFullScreen" />
+    <MemCardFullScreen :item="$store.state.memFullScreen" />
   </DialogVisible>
   <div class="memList">
     <MasonryWall :items="sortMemes" :min-columns="2" :column-width="300" :gap="5">
@@ -12,13 +12,14 @@
 </template>
 
 <script>
+import MemCardFullScreen from "@/components/MemCardFullScreen.vue";
 import MemCard from "@/components/MemCard.vue";
 import MasonryWall from "@yeger/vue-masonry-wall";
 import DialogVisible from "./UI/DialogVisible.vue";
 
 export default {
   name: "MemList",
-  components: { MemCard, DialogVisible },
+  components: { MemCardFullScreen, DialogVisible, MemCard },
   methods: {
     closeMemFullScreen() {
       this.$store.commit("setDialogVisible");

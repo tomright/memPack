@@ -43,7 +43,7 @@ import BaseButton from "@/components/UI/BaseButton.vue";
 import MemCardBase from "@/mixins/MemCardBase.js";
 export default {
   components: { BaseButton },
-  name: "MemCard",
+  name: "MemCardFullScreen",
   mixins: [MemCardBase],
 };
 </script>
@@ -70,8 +70,7 @@ export default {
   overflow: hidden;
 }
 .memList__memes-source {
-  height: 100%;
-  width: 100%;
+  height: 80vh;
   border-radius: 10px;
   object-fit: contain;
 }
