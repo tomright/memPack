@@ -70,7 +70,8 @@ export default {
   overflow: hidden;
 }
 .memList__memes-source {
-  height: 80vh;
+  max-height: 80vh;
+  max-width: 80vw;
   border-radius: 10px;
   object-fit: contain;
 }
