@@ -27,7 +27,7 @@ export default {
   },
   computed: {
     sortMemes() {
-      return this.$store.getters.sortMemes;
+      return this.$store.getters.searchAndSortMemes;
     },
   },
 };

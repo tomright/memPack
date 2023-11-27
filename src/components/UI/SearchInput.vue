@@ -1,7 +1,13 @@
 <template>
   <div class="search">
-    <input class="search__input" type="text" />
-    <BaseButton class="search__button" />
+    <input
+      @keydown.enter="search"
+      @input="search"
+      v-model="inputData"
+      class="search__input"
+      type="text"
+      placeholder="Введите текст для поиска" />
+    <BaseButton @click="search" class="search__button" />
   </div>
 </template>
 
@@ -11,6 +17,16 @@ import BaseButton from "./BaseButton.vue";
 export default {
   name: "SearchInput",
   components: { BaseButton },
+  data() {
+    return {
+      inputData: "",
+    };
+  },
+  methods: {
+    search() {
+      this.$store.commit("setSearchValue", this.inputData);
+    },
+  },
 };
 </script>
 

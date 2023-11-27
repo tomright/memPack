@@ -356,6 +356,7 @@ export default createStore({
       { value: "dateDec", name: "Дате (Убыванию)" },
       { value: "dateInc", name: "Дате (Возрастанию)" },
     ],
+    searchValue: "",
   },
   getters: {
     sortMemes: (state) => {
@@ -387,6 +388,15 @@ export default createStore({
         return first[state.selectedSort] - second[state.selectedSort];
       });
     },
+    //TODO переделать, так как нужно будет отправлять запрос на сервер, там все мемы, а в сторе лежит только часть
+    searchAndSortMemes: (state, getters) => {
+      return [...getters.sortMemes].filter((value) => {
+        for (let item of value.tags) {
+          console.log(item.toLowerCase().trim());
+          if (item.toLowerCase().trim().includes(state.searchValue.toLowerCase().trim())) return true;
+        }
+      });
+    },
   },
   mutations: {
     changeSortOption(state, payload) {
@@ -408,6 +418,9 @@ export default createStore({
         state.memFullScreen = idMemes;
         state.dialogVisible = true;
       }
+    },
+    setSearchValue(state, payload) {
+      state.searchValue = payload;
     },
   },
   actions: {
