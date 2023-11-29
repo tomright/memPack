@@ -5,13 +5,13 @@ const routes = [
     path: "/",
     component: () => import("@/pages/mainPage.vue"),
     name: "Домашнаяя страница",
-    title: "memPack",
+    title: "Главная страница",
   },
   {
-    path: "/memes/:id",
-    component: () => import("@/pages/currentMem.vue"),
-    name: "Текущий мем",
-    title: "memPack",
+    path: "/favorit",
+    component: () => import("@/pages/youMemes.vue"),
+    name: "Ваши мемы",
+    title: "Избранное",
   },
 ];
 
