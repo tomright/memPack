@@ -20,14 +20,15 @@ import DialogVisible from "./UI/DialogVisible.vue";
 export default {
   name: "MemList",
   components: { MemCardFullScreen, DialogVisible, MemCard },
+  props: {
+    sortMemes: {
+      type: Array,
+      required: true,
+    },
+  },
   methods: {
     closeMemFullScreen() {
       this.$store.commit("setDialogVisible");
-    },
-  },
-  computed: {
-    sortMemes() {
-      return this.$store.getters.searchAndSortMemes;
     },
   },
 };

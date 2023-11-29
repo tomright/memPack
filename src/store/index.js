@@ -392,7 +392,6 @@ export default createStore({
     searchAndSortMemes: (state, getters) => {
       return [...getters.sortMemes].filter((value) => {
         for (let item of value.tags) {
-          console.log(item.toLowerCase().trim());
           if (item.toLowerCase().trim().includes(state.searchValue.toLowerCase().trim())) return true;
         }
       });
