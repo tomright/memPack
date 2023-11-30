@@ -4,20 +4,28 @@ const routes = [
   {
     path: "/",
     component: () => import("@/pages/mainPage.vue"),
-    name: "Домашнаяя страница",
-    title: "Главная страница",
+    name: "Главная страница",
+    meta: {
+      title: "Главная страница",
+    },
   },
   {
     path: "/favorit",
     component: () => import("@/pages/youMemes.vue"),
     name: "Ваши мемы",
-    title: "Избранное",
+    meta: {
+      title: "Ваши мемы",
+    },
   },
 ];
 
 const router = createRouter({
   history: createWebHistory(),
   routes,
+});
+router.beforeEach((to, from, next) => {
+  document.title = `${to.meta.title}`;
+  next();
 });
 
 export default router;
