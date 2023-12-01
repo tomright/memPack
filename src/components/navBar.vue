@@ -3,7 +3,9 @@
     <BaseButton @click="$router.push('/')">Все мемы</BaseButton>
     <BaseButton @click="$router.push('/favorit')">Ваши мемы</BaseButton>
     <BaseButton @click="$router.push('/aboutus')">О приложении</BaseButton>
-    <BaseButton>Регистрация</BaseButton>
+    <BaseButton v-if="!$store.state.loggined" @click="$router.push('/register')">Регистрация</BaseButton>
+    <BaseButton v-if="!$store.state.loggined" @click="$router.push('/login')">Войти</BaseButton>
+    <BaseButton v-if="$store.state.loggined">Выход</BaseButton>
   </div>
 </template>
 

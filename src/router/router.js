@@ -18,6 +18,22 @@ const routes = [
     },
   },
   {
+    path: "/register",
+    component: () => import("@/pages/registerPage.vue"),
+    name: "Регистрация",
+    meta: {
+      title: "О приложении",
+    },
+  },
+  {
+    path: "/login",
+    component: () => import("@/pages/logInPage.vue"),
+    name: "Вход",
+    meta: {
+      title: "Вход",
+    },
+  },
+  {
     path: "/aboutus",
     component: () => import("@/pages/aboutUs.vue"),
     name: "О приложении",

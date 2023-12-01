@@ -357,6 +357,7 @@ export default createStore({
       { value: "dateInc", name: "Дате (Возрастанию)" },
     ],
     searchValue: "",
+    loggined: false,
   },
   getters: {
     sortMemes: (state) => {
