@@ -2,7 +2,7 @@
   <div class="navBar__line">
     <BaseButton @click="$router.push('/')">Все мемы</BaseButton>
     <BaseButton @click="$router.push('/favorit')">Ваши мемы</BaseButton>
-    <BaseButton>О нас</BaseButton>
+    <BaseButton @click="$router.push('/aboutus')">О приложении</BaseButton>
     <BaseButton>Регистрация</BaseButton>
   </div>
 </template>

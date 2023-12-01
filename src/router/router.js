@@ -17,6 +17,14 @@ const routes = [
       title: "Ваши мемы",
     },
   },
+  {
+    path: "/aboutus",
+    component: () => import("@/pages/aboutUs.vue"),
+    name: "О приложении",
+    meta: {
+      title: "О приложении",
+    },
+  },
 ];
 
 const router = createRouter({
