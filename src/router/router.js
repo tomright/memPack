@@ -22,7 +22,7 @@ const routes = [
     component: () => import("@/pages/registerPage.vue"),
     name: "Регистрация",
     meta: {
-      title: "О приложении",
+      title: "Регистрация",
     },
   },
   {
