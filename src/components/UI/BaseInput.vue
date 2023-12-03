@@ -16,8 +16,8 @@ export default {
     };
   },
   methods: {
-    inputEvent(e) {
-      this.$emit("inputEvent", e.target.data);
+    inputEvent() {
+      this.$emit("inputEvent", this.inputValue);
     },
   },
   emits: ["inputEvent"],
