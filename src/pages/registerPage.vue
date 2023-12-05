@@ -2,33 +2,58 @@
   <form method="post" @submit.prevent="sendForm">
     <div class="reg">
       <h1 class="reg__title">Регистрация</h1>
-      <BaseInput v-model="regData.email" placeholder="Ваш Email" type="email" required autocomplete="off" tabindex="1" />
-      <div class="reg__pass">
+      <div class="reg__input">
+        <label for="email">Введите вашу электронную почту:</label>
         <BaseInput
-          ref="pass"
-          v-model="regData.pass"
-          placeholder="Пароль"
-          :type="typePass"
+          v-model="regData.email"
+          placeholder="test@test.ru"
+          type="email"
           required
           autocomplete="off"
-          tabindex="2" />
-        <div class="reg__errorPass" v-show="!identityPass">Пароли должны совпадать!</div>
+          id="email"
+          tabindex="1" />
+        <div v-show="!emailValidate" class="reg__error">Вводите корректный email, формата: xxx@xxx.xx</div>
+      </div>
+      <div class="reg__pass">
+        <div class="reg__input">
+          <label for="pass">Введите пароль:</label>
+          <BaseInput
+            v-model="regData.pass"
+            placeholder="Пароль"
+            :type="typePass"
+            required
+            autocomplete="off"
+            id="pass"
+            tabindex="2" />
+          <div v-show="!minLengthCheck" class="reg__error">
+            Минимальная длинна пароля {{ minLength }}, вы ввели {{ regData.pass.length }}
+          </div>
+          <div v-show="!maxLengthCheck" class="reg__error">
+            Максимальная длинна пароля {{ maxLenght }}, вы ввели {{ regData.pass.length }}
+          </div>
+        </div>
         <BaseButton
           @click="show"
+          type="button"
           class="reg__passBtn"
           :class="{ 'reg__passBtn--hide': showPass }"
           tabindex="6"></BaseButton>
       </div>
       <div class="reg__pass">
-        <BaseInput
-          v-model="repeatPass"
-          placeholder="Повторите пароль"
-          :type="typePass"
-          required
-          autocomplete="off"
-          tabindex="3" />
+        <div class="reg__input">
+          <label for="repeat">Повторите пароль:</label>
+          <BaseInput
+            v-model="repeatPass"
+            placeholder="Повторите пароль"
+            :type="typePass"
+            required
+            autocomplete="off"
+            id="repeat"
+            tabindex="3" />
+          <div v-show="!identityPass" class="reg__error">Пароли должны совпадать!</div>
+        </div>
       </div>
-      <BaseButton tabindex="4">Зарегистрироваться</BaseButton>
+      <BaseButton :disabled="!finalValidator" type="submit" tabindex="4">Зарегистрироваться</BaseButton>
     </div>
   </form>
 </template>
@@ -44,7 +69,8 @@ export default {
       showPass: false,
       regExpEmail:
         /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-      // /^[-a-z0-9!#$%&'*+/=?^_`{|}~]+(\.[-a-z0-9!#$%&'*+/=?^_`{|}~]+)*@([a-z0-9]([-a-z0-9]{0,61}[a-z0-9])?\.)*(aero|arpa|asia|biz|cat|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|net|org|pro|tel|travel|[a-z][a-z])$/,
+      minLength: 8,
+      maxLenght: 16,
       regData: {
         email: "",
         pass: "",
@@ -61,12 +87,9 @@ export default {
       this.showPass = !this.showPass;
     },
     sendForm(e) {
-      console.log(e);
-    },
-    errorMessageCoordinate(ref) {
-      let coordinate = ref.getBoundingClientRect();
-      this.showErrorPass.top = `${coordinate.y}`;
-      this.showErrorPass.left = `${coordinate.x}`;
+      if (this.finalValidator) {
+        alert("Зарегано");
+      }
     },
   },
   computed: {
@@ -74,11 +97,30 @@ export default {
       return this.showPass ? "text" : "password";
     },
     emailValidate() {
-      return this.regExpEmail.test(this.regData.email);
+      return this.regData.email == "" ? true : this.regExpEmail.test(this.regData.email);
+    },
+    minLengthCheck() {
+      return this.regData.pass == "" ? true : this.regData.pass.length >= this.minLength;
     },
     identityPass() {
-      console.log(this.regData.pass === this.repeatPass);
       return this.regData.pass === this.repeatPass;
+    },
+    finalValidator() {
+      if (
+        this.regData.email !== "" &&
+        this.emailValidate &&
+        this.regData.pass !== "" &&
+        this.identityPass &&
+        this.minLengthCheck &&
+        this.maxLengthCheck
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    maxLengthCheck() {
+      return this.regData.pass.length <= this.maxLenght;
     },
   },
 };
@@ -92,6 +134,7 @@ export default {
   justify-content: center;
   row-gap: 20px;
   align-items: flex-start;
+  background-clip: padding-box;
 }
 .reg__pass {
   display: flex;
@@ -101,16 +144,34 @@ export default {
   column-gap: 5px;
 }
 .reg__passBtn {
-  width: 30px;
+  align-self: flex-end;
+  width: 40px;
+  height: 40px;
   border: none;
   background-image: url("@/assets/ui-img/showPass.svg");
 }
 .reg__passBtn--hide {
   background-image: url("@/assets/ui-img/hidePass.svg");
 }
-.reg__errorPass {
-  position: absolute;
-  display: flex;
+.reg__error {
+  width: 15vw;
+  background-color: pink;
+  font-size: 14px;
+  top: -15px;
+  z-index: -3;
+  position: relative;
+  padding-top: 20px;
+  padding-bottom: 5px;
+  padding-left: 5px;
   border-radius: 10px;
+  display: flex;
+  justify-content: center;
+}
+.reg__input {
+  display: flex;
+  flex-direction: column;
+}
+.reg__invalid:invalid {
+  border: 3px solid pink;
 }
 </style>
