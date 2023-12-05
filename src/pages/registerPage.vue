@@ -1,9 +1,9 @@
 <template>
   <form method="post" @submit.prevent="sendForm">
-    <div class="registration">
-      <h1 class="registration__title">Регистрация</h1>
+    <div class="reg">
+      <h1 class="reg__title">Регистрация</h1>
       <BaseInput v-model="regData.email" placeholder="Ваш Email" type="email" required autocomplete="off" tabindex="1" />
-      <div class="registration__pass">
+      <div class="reg__pass">
         <BaseInput
           ref="pass"
           v-model="regData.pass"
@@ -12,14 +12,14 @@
           required
           autocomplete="off"
           tabindex="2" />
-        <div class="registration__errorPass" v-show="!identityPass">Пароли должны совпадать!</div>
+        <div class="reg__errorPass" v-show="!identityPass">Пароли должны совпадать!</div>
         <BaseButton
           @click="show"
-          class="registration__passBtn"
-          :class="{ 'registration__passBtn--hide': showPass }"
+          class="reg__passBtn"
+          :class="{ 'reg__passBtn--hide': showPass }"
           tabindex="6"></BaseButton>
       </div>
-      <div class="registration__pass">
+      <div class="reg__pass">
         <BaseInput
           v-model="repeatPass"
           placeholder="Повторите пароль"
@@ -85,7 +85,7 @@ export default {
 </script>
 
 <style>
-.registration {
+.reg {
   padding-top: 10vh;
   display: flex;
   flex-direction: column;
@@ -93,22 +93,22 @@ export default {
   row-gap: 20px;
   align-items: flex-start;
 }
-.registration__pass {
+.reg__pass {
   display: flex;
   justify-content: center;
   align-content: stretch;
   align-items: center;
   column-gap: 5px;
 }
-.registration__passBtn {
+.reg__passBtn {
   width: 30px;
   border: none;
   background-image: url("@/assets/ui-img/showPass.svg");
 }
-.registration__passBtn--hide {
+.reg__passBtn--hide {
   background-image: url("@/assets/ui-img/hidePass.svg");
 }
-.registration__errorPass {
+.reg__errorPass {
   position: absolute;
   display: flex;
   border-radius: 10px;
