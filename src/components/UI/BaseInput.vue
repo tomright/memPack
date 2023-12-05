@@ -24,12 +24,13 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .baseInput {
   width: 15vw;
   padding: 10px;
   padding-left: 20px;
   border-radius: 10px;
   font-size: 15px;
+  border: 2px solid black;
 }
 </style>

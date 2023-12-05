@@ -30,7 +30,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .search {
   display: flex;
   justify-content: center;
@@ -38,6 +38,9 @@ export default {
 }
 .search__input {
   padding: 5px;
+  padding-left: 10px;
+  border-radius: 10px;
+  border: 2px solid black;
 }
 .search__button {
   background-image: url("@/assets/ui-img/search.svg");
