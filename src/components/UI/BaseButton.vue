@@ -16,11 +16,16 @@ export default {
   width: auto;
   height: 30px;
   border-radius: 5px;
-  border: 1px black solid;
+  border: 2px black solid;
   padding: 5px;
   cursor: pointer;
 }
 .baseButton:hover {
   background-color: rgb(223, 250, 241);
+}
+
+.baseButton:disabled {
+
+  border: 2px rgb(196, 196, 196) solid;
 }
 </style>
