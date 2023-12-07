@@ -14,9 +14,9 @@
           tabindex="1" />
         <div v-show="!emailValidate" class="reg__error">Вводите корректный email, формата: xxx@xxx.xx</div>
       </div>
-      <div class="reg__pass">
-        <div class="reg__input">
-          <label for="pass">Введите пароль:</label>
+      <div class="reg__input">
+        <label for="pass">Введите пароль:</label>
+        <div class="reg__pass">
           <BaseInput
             v-model="regData.pass"
             placeholder="Пароль"
@@ -25,19 +25,19 @@
             autocomplete="off"
             id="pass"
             tabindex="2" />
-          <div v-show="!minLengthCheck" class="reg__error">
-            Минимальная длинна пароля {{ minLength }}, вы ввели {{ regData.pass.length }}
-          </div>
-          <div v-show="!maxLengthCheck" class="reg__error">
-            Максимальная длинна пароля {{ maxLenght }}, вы ввели {{ regData.pass.length }}
-          </div>
+          <BaseButton
+            @click="show"
+            type="button"
+            class="reg__showBtn"
+            :class="{ 'reg__showBtn--hide': showPass }"
+            tabindex="6"></BaseButton>
         </div>
-        <BaseButton
-          @click="show"
-          type="button"
-          class="reg__passBtn"
-          :class="{ 'reg__passBtn--hide': showPass }"
-          tabindex="6"></BaseButton>
+        <div v-show="!minLengthCheck" class="reg__error">
+          Минимальная длинна пароля {{ minLength }}, вы ввели {{ regData.pass.length }}
+        </div>
+        <div v-show="!maxLengthCheck" class="reg__error">
+          Максимальная длинна пароля {{ maxLenght }}, вы ввели {{ regData.pass.length }}
+        </div>
       </div>
       <div class="reg__pass">
         <div class="reg__input">
@@ -61,47 +61,24 @@
 <script>
 import BaseButton from "../components/UI/BaseButton.vue";
 import BaseInput from "../components/UI/BaseInput.vue";
+import formValidator from "@/mixins/FormValidator.js";
 
 export default {
   components: { BaseInput, BaseButton },
+  mixins: [formValidator],
   data() {
     return {
-      showPass: false,
-      regExpEmail:
-        /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-      minLength: 8,
-      maxLenght: 16,
-      regData: {
-        email: "",
-        pass: "",
-      },
       repeatPass: "",
-      showErrorPass: {
-        top: "",
-        left: "",
-      },
     };
   },
   methods: {
-    show() {
-      this.showPass = !this.showPass;
-    },
-    sendForm(e) {
+    sendForm() {
       if (this.finalValidator) {
         alert("Зарегано");
       }
     },
   },
   computed: {
-    typePass() {
-      return this.showPass ? "text" : "password";
-    },
-    emailValidate() {
-      return this.regData.email == "" ? true : this.regExpEmail.test(this.regData.email);
-    },
-    minLengthCheck() {
-      return this.regData.pass == "" ? true : this.regData.pass.length >= this.minLength;
-    },
     identityPass() {
       return this.regData.pass === this.repeatPass;
     },
@@ -118,9 +95,6 @@ export default {
       } else {
         return false;
       }
-    },
-    maxLengthCheck() {
-      return this.regData.pass.length <= this.maxLenght;
     },
   },
 };
@@ -143,14 +117,14 @@ export default {
   align-items: center;
   column-gap: 5px;
 }
-.reg__passBtn {
-  align-self: flex-end;
+.reg__showBtn {
+  align-self: center;
   width: 40px;
   height: 40px;
   border: none;
   background-image: url("@/assets/ui-img/showPass.svg");
 }
-.reg__passBtn--hide {
+.reg__showBtn--hide {
   background-image: url("@/assets/ui-img/hidePass.svg");
 }
 .reg__error {
