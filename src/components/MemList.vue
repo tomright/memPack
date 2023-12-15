@@ -3,7 +3,7 @@
     <MemCardFullScreen :item="$store.state.memFullScreen" />
   </DialogVisible>
   <div class="memList">
-    <MasonryWall :items="sortMemes" :min-columns="2" :column-width="300" :gap="5">
+    <MasonryWall :items="sortMemes" :min-columns="minColumns" :column-width="300" :gap="5">
       <template #default="{ item }">
         <MemCard :item="item" />
       </template>
@@ -26,10 +26,29 @@ export default {
       required: true,
     },
   },
+  data() {
+    return {
+      widthWindow: "",
+    };
+  },
   methods: {
     closeMemFullScreen() {
       this.$store.commit("setDialogVisible");
     },
+    windowResize(e) {
+      this.widthWindow = window.innerWidth;
+    },
+  },
+  computed: {
+    minColumns() {
+      return this.widthWindow < 500 ? 1 : 2;
+    },
+  },
+  created() {
+    window.addEventListener("resize", this.windowResize);
+  },
+  deactivated() {
+    window.removeEventListener("resize", this.windowResize);
   },
 };
 </script>
