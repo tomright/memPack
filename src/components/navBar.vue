@@ -1,16 +1,18 @@
 <template>
   <div class="navbar__wrapper">
-    <div class="navbar__menu-burger">
+    <div @click="menuToggle" class="navbar__menu-burger">
       <img class="navbar__burger-img" src="@/assets/ui-img/burger.svg" alt="Меню" />
     </div>
-    <div class="navBar__line">
-      <BaseButton @click="$router.push('/')">Все мемы</BaseButton>
-      <BaseButton @click="$router.push('/favorit')">Ваши мемы</BaseButton>
-      <BaseButton @click="$router.push('/aboutus')">О приложении</BaseButton>
-      <BaseButton v-if="!$store.state.loggined" @click="$router.push('/register')">Регистрация</BaseButton>
-      <BaseButton v-if="!$store.state.loggined" @click="$router.push('/login')">Войти</BaseButton>
-      <BaseButton v-if="$store.state.loggined">Выход</BaseButton>
-    </div>
+    <TransitionGroup name="navBarAnim">
+      <div class="navBar__line" :class="{ 'navBar__line--show': showMenu }">
+        <BaseButton @click="$router.push('/')">Все мемы</BaseButton>
+        <BaseButton @click="$router.push('/favorit')">Ваши мемы</BaseButton>
+        <BaseButton @click="$router.push('/aboutus')">О приложении</BaseButton>
+        <BaseButton v-if="!$store.state.loggined" @click="$router.push('/register')">Регистрация</BaseButton>
+        <BaseButton v-if="!$store.state.loggined" @click="$router.push('/login')">Войти</BaseButton>
+        <BaseButton v-if="$store.state.loggined">Выход</BaseButton>
+      </div>
+    </TransitionGroup>
   </div>
 </template>
 
@@ -20,6 +22,16 @@ export default {
   name: "NavBar",
   components: {
     BaseButton,
+  },
+  data() {
+    return {
+      showMenu: false,
+    };
+  },
+  methods: {
+    menuToggle() {
+      this.showMenu = !this.showMenu;
+    },
   },
 };
 </script>
@@ -39,7 +51,7 @@ export default {
     z-index: 9999;
     display: flex;
     position: fixed;
-    top: 55%;
+    top: 50%;
     right: 0;
     background-color: white;
     border-radius: 10px;
@@ -49,8 +61,9 @@ export default {
     border-radius: 10px;
   }
   .navBar__line {
+    visibility: hidden;
     position: fixed;
-    top: 60%;
+    top: 55%;
     right: 0px;
     display: flex;
     flex-direction: column;
@@ -58,6 +71,9 @@ export default {
     background-color: white;
     border-radius: 10px;
     padding: 10px;
+  }
+  .navBar__line--show {
+    visibility: visible;
   }
 }
 </style>
