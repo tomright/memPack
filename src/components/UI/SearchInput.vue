@@ -35,6 +35,7 @@ export default {
   display: flex;
   justify-content: center;
   column-gap: 3px;
+  height: 35px;
 }
 .search__input {
   padding: 5px;
@@ -46,7 +47,7 @@ export default {
   background-image: url("@/assets/ui-img/search.svg");
   background-size: contain;
   background-position: center;
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
 }
 </style>

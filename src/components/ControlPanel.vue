@@ -1,7 +1,7 @@
 <template>
   <div class="control">
     <SearchInput />
-    <BaseSelector />
+    <BaseSelector class="control__baseSelector" />
   </div>
 </template>
 
@@ -21,7 +21,17 @@ export default {
 .control {
   display: flex;
   justify-content: center;
-  width: 50vw;
+  width: 80vw;
   column-gap: 15px;
+}
+.control__baseSelector {
+  align-self: center;
+}
+@media (max-width: 991.98px) {
+  .control {
+    flex-direction: column;
+    row-gap: 10px;
+    height: 100%;
+  }
 }
 </style>

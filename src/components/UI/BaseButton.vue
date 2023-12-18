@@ -14,7 +14,7 @@ export default {
 .baseButton {
   background-color: inherit;
   width: auto;
-  height: 30px;
+  height: 100%;
   border-radius: 5px;
   border: 2px black solid;
   padding: 5px;
