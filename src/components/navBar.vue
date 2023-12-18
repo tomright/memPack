@@ -42,9 +42,11 @@ export default {
     top: 55%;
     right: 0;
     background-color: white;
+    border-radius: 10px;
   }
   .navbar__burger-img {
-  width: 35px;
+    width: 35px;
+    border-radius: 10px;
   }
   .navBar__line {
     position: fixed;
@@ -53,6 +55,9 @@ export default {
     display: flex;
     flex-direction: column;
     row-gap: 10px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px;
   }
 }
 </style>
