@@ -16,39 +16,27 @@ import MemCardFullScreen from "@/components/MemCardFullScreen.vue";
 import MemCard from "@/components/MemCard.vue";
 import MasonryWall from "@yeger/vue-masonry-wall";
 import DialogVisible from "./UI/DialogVisible.vue";
+import widthWindow from "@/mixins/WidthWindow.js";
 
 export default {
   name: "MemList",
   components: { MemCardFullScreen, DialogVisible, MemCard },
+  mixins: [widthWindow],
   props: {
     sortMemes: {
       type: Array,
       required: true,
     },
   },
-  data() {
-    return {
-      widthWindow: "",
-    };
-  },
   methods: {
     closeMemFullScreen() {
       this.$store.commit("setDialogVisible");
     },
-    windowResize(e) {
-      this.widthWindow = window.innerWidth;
-    },
   },
   computed: {
     minColumns() {
-      return this.widthWindow < 500 ? 1 : 2;
+      return this.widthWindow < 466 ? 1 : 2;
     },
-  },
-  created() {
-    window.addEventListener("resize", this.windowResize);
-  },
-  deactivated() {
-    window.removeEventListener("resize", this.windowResize);
   },
 };
 </script>
