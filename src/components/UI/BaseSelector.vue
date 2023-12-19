@@ -22,5 +22,7 @@ export default {
 .baseSelector {
   padding-left: 20px;
   height: 35px;
+  border-radius: 10px;
+  border: 2px solid black;
 }
 </style>
