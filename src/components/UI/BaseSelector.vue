@@ -21,6 +21,7 @@ export default {
 <style scoped>
 .baseSelector {
   padding-left: 20px;
+  background-color: white;
   height: 35px;
   border-radius: 10px;
   border: 2px solid black;
