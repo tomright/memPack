@@ -45,11 +45,6 @@ export default {
   components: { BaseButton },
   name: "MemCardFullScreen",
   mixins: [MemCardBase],
-  data() {
-    return {
-      imgWidth: {},
-    };
-  },
   computed: {
     imgWidth() {
       // if (window.innerWidth > window.innerHeight) {
