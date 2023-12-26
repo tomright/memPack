@@ -33,4 +33,10 @@ export default {
   font-size: 15px;
   border: 2px solid black;
 }
+
+@media (max-width: 991.98px) {
+  .baseInput {
+    width: 230px;
+  }
+}
 </style>
