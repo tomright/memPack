@@ -1,7 +1,7 @@
 <template>
   <div class="memList__memes">
     <div class="memList__img" @click="fullScreen">
-      <img class="memList__memes-source" :src="item.src" alt="" />
+      <img class="memList__memes-source" :style="imgWidth" :src="item.src" alt="" />
     </div>
     <div class="memList__control">
       <div class="memList__social">
@@ -45,6 +45,30 @@ export default {
   components: { BaseButton },
   name: "MemCardFullScreen",
   mixins: [MemCardBase],
+  data() {
+    return {
+      imgWidth: {},
+    };
+  },
+  computed: {
+    imgWidth() {
+      // if (window.innerWidth > window.innerHeight) {
+      //   return {
+      //     height: `${window.innerHeight - 20}px`,
+      //   };
+      // } else {
+      //   return {
+      //     width: `${window.innerWidth - 10}px`,
+      //   };
+      // }
+      return {
+        "max-height": `${window.innerHeight - 20}px`,
+        "max-width": `${window.innerWidth - 10}px`,
+        "min-height": `${window.innerHeight / 2 - 20}px`,
+        "min-width": `${window.innerWidth / 10}px`,
+      };
+    },
+  },
 };
 </script>
 
@@ -60,8 +84,8 @@ export default {
   height: auto;
   border: 2px solid green;
   background-color: white;
-  max-width: 90vw;
-  max-height: 90vh;
+  max-width: 100vw;
+  max-height: 100vh;
 }
 .memList__img {
   display: flex;
@@ -71,7 +95,6 @@ export default {
 }
 /* TODO в мобильной версии сделать и ширину и высоту */
 .memList__memes-source {
-  height: 80vh;
   border-radius: 10px;
   object-fit: contain;
 }
