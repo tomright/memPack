@@ -121,4 +121,9 @@ export default {
 .reg__showBtn--hide {
   background-image: url("@/assets/ui-img/hidePass.svg");
 }
+@media (max-width: 991.98px) {
+  .reg__error {
+    width: 230px;
+  }
+}
 </style>

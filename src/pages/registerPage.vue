@@ -148,4 +148,9 @@ export default {
 .reg__invalid:invalid {
   border: 3px solid pink;
 }
+@media (max-width: 991.98px) {
+  .reg__error {
+    width: 230px;
+  }
+}
 </style>
