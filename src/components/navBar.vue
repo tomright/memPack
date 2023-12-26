@@ -5,11 +5,43 @@
     </div>
     <TransitionGroup name="navBarAnim">
       <div class="navBar__line" :class="{ 'navBar__line--show': showMenu }">
-        <BaseButton @click="$router.push('/')">Все мемы</BaseButton>
-        <BaseButton @click="$router.push('/favorit')">Ваши мемы</BaseButton>
-        <BaseButton @click="$router.push('/aboutus')">О приложении</BaseButton>
-        <BaseButton v-if="!$store.state.loggined" @click="$router.push('/register')">Регистрация</BaseButton>
-        <BaseButton v-if="!$store.state.loggined" @click="$router.push('/login')">Войти</BaseButton>
+        <BaseButton
+          @click="
+            $router.push('/');
+            menuToggle();
+          "
+          >Все мемы</BaseButton
+        >
+        <BaseButton
+          @click="
+            $router.push('/favorit');
+            menuToggle();
+          "
+          >Ваши мемы</BaseButton
+        >
+        <BaseButton
+          @click="
+            $router.push('/aboutus');
+            menuToggle();
+          "
+          >О приложении</BaseButton
+        >
+        <BaseButton
+          v-if="!$store.state.loggined"
+          @click="
+            $router.push('/register');
+            menuToggle();
+          "
+          >Регистрация</BaseButton
+        >
+        <BaseButton
+          v-if="!$store.state.loggined"
+          @click="
+            $router.push('/login');
+            menuToggle();
+          "
+          >Войти</BaseButton
+        >
         <BaseButton v-if="$store.state.loggined">Выход</BaseButton>
       </div>
     </TransitionGroup>
