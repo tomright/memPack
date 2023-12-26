@@ -47,15 +47,6 @@ export default {
   mixins: [MemCardBase],
   computed: {
     imgWidth() {
-      // if (window.innerWidth > window.innerHeight) {
-      //   return {
-      //     height: `${window.innerHeight - 20}px`,
-      //   };
-      // } else {
-      //   return {
-      //     width: `${window.innerWidth - 10}px`,
-      //   };
-      // }
       return {
         "max-height": `${window.innerHeight - 20}px`,
         "max-width": `${window.innerWidth - 10}px`,
