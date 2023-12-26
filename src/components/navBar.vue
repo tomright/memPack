@@ -3,8 +3,8 @@
     <div @click="menuToggle" class="navbar__menu-burger">
       <img class="navbar__burger-img" src="@/assets/ui-img/burger.svg" alt="Меню" />
     </div>
-    <TransitionGroup name="navBarAnim">
-      <div class="navBar__line" :class="{ 'navBar__line--show': showMenu }">
+    <Transition name="navBarAnim">
+      <div class="navBar__line" v-show="showMenu">
         <BaseButton
           @click="
             $router.push('/');
@@ -44,7 +44,7 @@
         >
         <BaseButton v-if="$store.state.loggined">Выход</BaseButton>
       </div>
-    </TransitionGroup>
+    </Transition>
   </div>
 </template>
 
@@ -93,7 +93,6 @@ export default {
     border-radius: 10px;
   }
   .navBar__line {
-    visibility: hidden;
     position: fixed;
     top: 55%;
     right: 0px;
@@ -104,8 +103,13 @@ export default {
     border-radius: 10px;
     padding: 10px;
   }
-  .navBar__line--show {
-    visibility: visible;
+  .navBarAnim-enter-from,
+  .navBarAnim-leave-to {
+    opacity: 0;
+  }
+  .navBarAnim-enter-active,
+  .navBarAnim-leave-active {
+    transition: opacity 0.5s ease;
   }
 }
 </style>
