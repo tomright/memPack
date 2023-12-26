@@ -34,4 +34,11 @@
   width: 50vw;
   margin: 0 auto;
 }
+@media (max-width: 991.98px) {
+  .wrapper {
+    padding-top: 5vh;
+    width: 80vw;
+    margin: 0 auto;
+  }
+}
 </style>
