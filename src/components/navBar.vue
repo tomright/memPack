@@ -4,7 +4,7 @@
       <img class="navbar__burger-img" src="@/assets/ui-img/burger.svg" alt="Меню" />
     </div>
     <Transition name="navBarAnim">
-      <div class="navBar__line" v-show="showMenu">
+      <div class="navBar__line" v-show="show">
         <BaseButton
           @click="
             $router.push('/');
@@ -63,6 +63,11 @@ export default {
   methods: {
     menuToggle() {
       this.showMenu = !this.showMenu;
+    },
+  },
+  computed: {
+    show() {
+      return this.showMenu || window.innerWidth > 991.98;
     },
   },
 };
